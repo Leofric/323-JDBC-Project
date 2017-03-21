@@ -1,0 +1,66 @@
+CREATE TABLE WritingGroup(
+groupName   VARCHAR(20) NOT NULL,
+headWriter  VARCHAR(20),
+yearFormed  DATE,
+subject     VARCHAR(20),
+CONSTRAINT WritingGroup_pk PRIMARY KEY (groupName)
+);
+
+CREATE TABLE Publisher(
+publisherName       VARCHAR(20) NOT NULL,
+publisherAddress    VARCHAR(30),
+publisherPhone      VARCHAR(20),
+publisherEmail      VARCHAR(30),
+CONSTRAINT Publisher_pk PRIMARY KEY (publisherName)
+);
+
+CREATE TABLE Book(
+bookTitle       VARCHAR(30) NOT NULL,
+groupName       VARCHAR(20) NOT NULL,
+publisherName   VARCHAR(20) NOT NULL,
+yearPublished   INT,
+numberPages     INT,
+CONSTRAINT Book_pk PRIMARY KEY (bookTitle),
+CONSTRAINT Book_fkwg FOREIGN KEY (groupName) REFERENCES WritingGroup(groupName),
+CONSTRAINT Book_fkpub FOREIGN KEY (publisherName) REFERENCES Publisher(publisherName)
+);
+
+INSERT INTO writingGroup VALUES
+('Gold Team', 'Rick Newman', '2014-03-21', 'Biology'), 
+('Crusy Krab', 'Mr.Crabs', '2000-10-11', 'Food'), 
+('Stack Overflow', 'Mr.Roboto', '2016-12-12', 'Computer Science'),
+('League of Legends', 'Varus', '2017-01-01', 'Gaming'),
+('Students United', 'Brad Blandon', '2006-04-17', 'Education'), 
+('Math is Fun', 'Jane Pi', '2007-09-11', 'Mathmatics'),
+('Code Crew', 'Joe Willison', '2010-08-08', 'Computer Science'),
+('We Love Pi', 'Grant Smith', '2007-01-02', 'Mathmatics'),
+('Swag', 'Chad Coolman', '2016-12-25', 'Trendy'),
+('We Troll', 'Erik Trollman', '2015-09-07', 'Gaming'); 
+
+INSERT INTO publisher VALUES
+('We Publish', '112 Oakwood Avenue', '101-898-0973', 'WePublishStuff@msn.com'),
+('QIA', '3342 Second Street', '981-199-0234', 'QIA@stuff.com'),
+('ABC Publishing', '112 Main Street', '123-456-7890', 'ABCPublishing@publisher.com'),
+('Quality Books', '5557 North Pendale Street', '472-094-1674', 'QualityBooks@stuff.com'),
+('POP', '881 Poppin Avenue', '442-989-9921', 'POPPIN@pop.com'),
+('Paper Knowledge', '110 Knowledge Drive', '118-919-6455', 'PKnowledge@mail.com');   
+
+INSERT INTO book VALUES
+('Bio for dummies', 'Gold Team', 'We Publish', 2015, 418),
+('The Best Burger', 'Crusy Krab', 'QIA', 2001, 150),
+('How to kill your computer', 'Stack Overflow', 'ABC Publishing', 2017, 119),
+('ADC in 2k17', 'League of Legends', 'Quality Books', 2017, 110),
+('Survival: A Students Guide', 'Students United', 'POP', 2007, 400),
+('Linear Algebra', 'Math is Fun', 'Paper Knowledge', 2008, 900),
+('Error: Life Not Found', 'Code Crew', 'We Publish', 2011, 350),
+('Simple Geometry', 'We Love Pi', 'ABC Publishing', 2008, 600),
+('How to be Cool', 'Swag', 'Quality Books', 2017, 290),
+('How to Feed 101', 'We Troll', 'Quality Books', 2016, 100),
+('Debugging', 'Code Crew', 'Paper Knowledge', 2012, 9999),
+('Ganking your lanes', 'We Troll', 'POP', 2017, 200);
+   
+--DROP TABLE WritingGroup;
+
+--DROP TABLE Book;
+
+--DROP TABLE Publisher;
